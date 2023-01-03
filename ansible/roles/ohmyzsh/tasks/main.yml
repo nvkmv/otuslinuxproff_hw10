@@ -1,0 +1,21 @@
+---
+- name: install packege
+  dnf:
+    name:
+      - zsh
+      - git
+      - wget
+    state: latest
+
+- name: get and install ohmyzsh
+  become: no
+  get_url: 
+    url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /home/vagrant/ohmyzsh.sh
+
+      #- name: run script
+      #become: no
+      #shell: bash /home/vagrant/ohmyzsh.sh
+
+- name: config ohmyzsh
+  shell: sed -i 's|vagrant:x:1000:1000::/home/vagrant:/bin/bash|vagrant:x:1000:1000::/home/vagrant:/bin/zsh|' /etc/passwd && sed -i 's|ZSH_THEME="robbyrussell"|ZSH_THEME="daveverwer"|' /home/vagrant/.zshrc

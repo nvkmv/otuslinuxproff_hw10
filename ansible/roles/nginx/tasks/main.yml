@@ -1,0 +1,24 @@
+---
+
+- name: dnf update
+  dnf:
+    name: '*'
+    state: latest
+
+- name: inastall nginx
+  dnf:
+    name: nginx
+    state: latest
+
+- name: template config
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: start nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+
