@@ -1,10 +1,10 @@
 ---
 
-- name:  playbook HW15
+- name:  playbook HW10
   hosts: all
   become: true
     
   roles:
-    - ohmyzsh
-    - nginx
+    #- ohmyzsh
+    #- nginx
     - sendlog 

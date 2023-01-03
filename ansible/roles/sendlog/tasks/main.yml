@@ -1,15 +1,16 @@
 ---
 - name: install mail server
   dnf:
-    - postfix
-    - mailx
-  state: latest
+    name:
+      - postfix
+      - mailx
+    state: latest
 
 - name: start postfix
   systemd:
     name: postfix
-  state: started
-  enabled: yes
+    state: started
+    enabled: yes
 
 - name: add script
   template: 
