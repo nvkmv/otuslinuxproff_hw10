@@ -1,0 +1,8 @@
+---
+- name: selinux disable
+  selinux:
+    state: disabled
+
+- name: reboot
+  reboot:
+    reboot_timeout: 3600

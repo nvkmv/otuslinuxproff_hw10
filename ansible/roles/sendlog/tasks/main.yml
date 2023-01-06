@@ -3,9 +3,17 @@
   dnf:
     name:
       - postfix
-      - mailx
+      - s-nail
     state: latest
 
+- name: template mailrc
+  template:
+    src: templates/mailrc
+    dest: /home/vagrant/.mailrc
+    owner: root
+    group: root
+    mode: "0644"
+ 
 - name: start postfix
   systemd:
     name: postfix

@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "nvkmv/rockylinux8.6"
+  config.vm.box = "nvkmv/rockylinux9"
   config.vm.box_version = "1.0"
 
   # Disable automatic box update checking. If you disable this, then

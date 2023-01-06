@@ -5,6 +5,7 @@
   become: true
     
   roles:
-    #- ohmyzsh
-    #- nginx
+    - selinux
+      #- ohmyzsh
+    - nginx
     - sendlog 
