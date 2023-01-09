@@ -1,0 +1,7 @@
+---
+- name: crontab
+  cron:
+    name: sendlog
+    minute: "*/1"
+    job: /usr/local/bin/sendlog.sh
+  become: no    

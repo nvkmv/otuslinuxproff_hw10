@@ -26,4 +26,8 @@
     dest: /usr/local/bin/sendlog.sh
     owner: vagrant
     group: vagrant
-    mode: "0755"  
+    mode: "0755" 
+
+- include_tasks: crontab.yml
+
+
