@@ -1,8 +1,9 @@
 #!/bin/bash
-
 leftdate=$(date --date='1 hour ago')
 currentdate=$(date)
 
-access=$(sudo awk '{ print $1, $7 }' /var/log/nginx/access.log | sudo sort -uk1)
-error=$(sudo awk '{print $2, $16, $7 }' /var/log/nginx/error.log)
-echo -e "report from $leftdate to $currentdate\nпереходы:\n$access\nошибки:\n$error " | mail -s "sendlog" {{ mail }}
+parse=$(sudo awk '{print "- " $1 ","}' /var/log/nginx/access.log | uniq -c | sort -nr)
+
+echo ""$parse | sed 's/,/\n/g' > mail
+
+echo "report from $leftdate to $currentdate" | mail -s "nginx_log" -q mail {{ mail }}  
