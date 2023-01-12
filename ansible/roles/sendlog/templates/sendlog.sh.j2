@@ -1,13 +1,29 @@
 #!/bin/bash
-leftdate=$(date --date='1 hour ago')
-currentdate=$(date)
+leftdate=$(date --date='1 hour ago' | cut -d " " -f4,5,6)
+currentdate=$(date | cut -d " " -f4,5,6)
+myip=$(hostname -I | awk '{print $2}') #$(ip addr show | grep eth1 | grep inet | cut -d " " -f6)
 
+echo "Report from $myip "time: " $leftdate - $currentdate " > mail
+
+# список адресов
+echo "" >> mail
+echo "Список IP адресов: " >> mail
 parse=$(sudo awk '{print "- " $1 ","}' /var/log/nginx/access.log | sort | uniq -c | sort -nr)
 
-echo ""$parse | sed 's/,/\n/g' > mail
+echo ""$parse | sed 's/,/\n/g' >> mail # sed использовал для замены "," (которую вставил в awk) на новую строку
+
+# Список запрашиваемых URL реализовал циклом для практики
+echo "Список запрашиваемых URL:" >> mail
 
 for var in $(sudo awk '{print $7}' /var/log/nginx/access.log)
 do echo "count" $var
 done | sort | uniq -c | sort -nr >> mail
 
-echo "report from $leftdate to $currentdate" | mail -s "nginx_log" -q mail mishanovak@ya.ru  
+echo "" >> mail
+
+# список кодов HTTP ответа
+echo "Список кодов HTTP ответа: " >> mail
+
+sudo awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -rn >> mail 
+
+echo " " | mail -s "nginx_log $myip" -q mail {{ mail }}  
