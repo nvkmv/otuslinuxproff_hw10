@@ -1,2 +1,2 @@
-# otuslinuxproff_hw15
-otuslinuxproff_hw15
+# otuslinuxproff_hw10
+otuslinuxproff_hw10
