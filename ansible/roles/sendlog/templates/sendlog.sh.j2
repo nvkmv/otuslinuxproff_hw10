@@ -24,6 +24,10 @@ echo "" >> mail
 # список кодов HTTP ответа
 echo "Список кодов HTTP ответа: " >> mail
 
-sudo awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -rn >> mail 
+sudo awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -rn >> mail
 
-echo " " | mail -s "nginx_log $myip" -q mail {{ mail }}  
+echo "Ошибки веб-сервера" >> mail
+
+sudo awk '{print $7}' /var/log/nginx/error.log | sort | uniq -c >> mail
+
+echo " " | mail -s "nginx_log $myip" -q {{ mail }}  
