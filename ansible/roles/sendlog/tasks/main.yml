@@ -23,9 +23,9 @@
 - name: add script
   template: 
     src: templates/sendlog.sh.j2
-    dest: /usr/local/bin/sendlog.sh
-    owner: vagrant
-    group: vagrant
+    dest: /usr/bin/sendlog.sh
+    owner: root
+    group: root
     mode: "0755" 
 
 - include_tasks: crontab.yml
