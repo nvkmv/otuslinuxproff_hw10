@@ -3,5 +3,5 @@
   cron:
     name: sendlog
     minute: "*/1"
-    job: */1 * * * * /usr/bin/flock -w0 /tmp/sendlog.lock /usr/bin/sendlog.sh
+    job: /usr/bin/flock -w0 /tmp/sendlog.lock /usr/bin/sendlog.sh
   become: no     
