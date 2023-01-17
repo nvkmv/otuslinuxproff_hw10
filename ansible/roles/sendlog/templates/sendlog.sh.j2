@@ -1,6 +1,6 @@
 #!/bin/bash
-leftdate=$(date --date='1 hour ago' | cut -d " " -f4,5,6)
-currentdate=$(date | cut -d " " -f4,5,6)
+leftdate=$(date --date='1 hour ago' '+%H:%M:%S')
+currentdate=$(date '+%H:%M:%S')
 myip=$(hostname -I | awk '{print $2}') #$(ip addr show | grep eth1 | grep inet | cut -d " " -f6)
 
 echo "Report from $myip "time: " $leftdate - $currentdate " > mail
@@ -24,11 +24,11 @@ echo "" >> mail
 # список кодов HTTP ответа
 echo "Список кодов HTTP ответа: " >> mail
 
-sudo awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -rn >> mail
+sudo awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -nr >> mail
 
 echo "" >> mail
 echo "Ошибки веб-сервера:" >> mail
 
-sudo awk '{print $0}' /var/log/nginx/error.log | cut -d' ' -f3-14 | sort | uniq -c >> mail
+sudo awk '{print $0}' /var/log/nginx/error.log | cut -d' ' -f3-14 | tr -d ',' | sort | uniq -c | sort -nr >> mail
 
 echo " " | mail -s "nginx_log $myip" -q mail {{ mail }}  
