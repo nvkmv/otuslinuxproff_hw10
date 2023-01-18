@@ -1,5 +1,5 @@
-# otuslinuxproff_hw10
-## Домашнее задание по bash
+# Домашнее задание по bash
+
 Срипт лежит в ``` ansible/roles/sendlog/templates/ ```
 
 Запрет на одновременный запуск нескольких копий скрипта сделан через flock в файле ``` ansible/roles/sendlog/tasks/crontab.yml ```
