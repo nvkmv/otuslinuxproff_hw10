@@ -3,6 +3,14 @@ leftdate=$(date --date='1 hour ago' '+%H:%M:%S')
 currentdate=$(date '+%H:%M:%S')
 myip=$(hostname -I | awk '{print $2}') #$(ip addr show | grep eth1 | grep inet | cut -d " " -f6)
 
+# фукция выделения времени проишествия, не могу пока прикрутить к другим действиям
+# идея примерно такую конструкцию собрать: awk '{if parsedate > $leftdate print $9 }'
+
+#parsedate=$(sudo awk '{print $4}' /var/log/nginx/access.log | cut -f2-4 -d':')
+
+
+###
+
 echo "Report from $myip "time: " $leftdate - $currentdate " > mail
 
 # список адресов
