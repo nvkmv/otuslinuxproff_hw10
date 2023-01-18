@@ -4,4 +4,4 @@
     name: sendlog
     minute: "*/1"
     job: /usr/bin/flock -w0 /tmp/sendlog.lock /usr/bin/sendlog.sh
-  become: no     
+           

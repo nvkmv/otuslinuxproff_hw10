@@ -6,6 +6,14 @@
       - s-nail
     state: latest
 
+- name: template postfix
+  template:
+    src: templates/main.cf.j2
+    dest: /etc/postfix/main.cf
+    owner: root
+    group: root
+    mode: "0644"
+ 
 - name: template mailrc
   template:
     src: templates/mailrc
@@ -24,8 +32,8 @@
   template: 
     src: templates/sendlog.sh.j2
     dest: /usr/bin/sendlog.sh
-    owner: root
-    group: root
+    owner: vagrant
+    group: vagrant
     mode: "0755" 
 
 - include_tasks: crontab.yml
