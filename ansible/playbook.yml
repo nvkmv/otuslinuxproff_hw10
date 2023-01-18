@@ -3,7 +3,12 @@
 - name:  playbook HW10
   hosts: all
   become: true
-    
+
+  tasks:
+    - name: change time zone
+      community.general.timezone:
+        name: Europe/Moscow
+
   roles: 
     - nginx
     - sendlog 
